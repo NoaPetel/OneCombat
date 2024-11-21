@@ -17,7 +17,7 @@ This project is a **fighting game** inspired by the *One Piece* universe. It com
 <br/>
 
 <p align="center">
-	<img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/One_Piece_Logo.png" width="500">
+	<img src="https://github.com/NoaPetel/OneCombat/blob/main/onecombat.gif" width="500">
 </p>
 
 <br/>
