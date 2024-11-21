@@ -1,0 +1,87 @@
+Player1(Init){
+  * (Init):
+  | Key(i)  ? Wizz() :(Init)
+  | Key(o)  ? Pop() :(Init)
+  | Key(FD)  ? Hit() :(Init)
+  | Key(p)  ? Protect() :(Init)
+  | Key(FU) ? Jump():(Init)
+
+  | Key(FL) ? Move(L) :(Init)
+  | Key(FR) ? Move(R) :(Init)
+
+  | True()  ? Throw() : (Init)
+
+}
+
+Player2(Init){
+  * (Init):
+  | Key(a)  ? Wizz() :(Init)
+  | Key(e)  ? Pop() :(Init)
+  | Key(s)  ? Hit() :(Init)
+  | Key(SPACE)  ? Protect() :(Init)
+  | Key(z) ? Jump():(Init)
+
+  | Key(q) ? Move(L) :(Init)
+  | Key(d) ? Move(R) :(Init)
+
+  | True()  ? Throw() : (Init)
+
+}
+
+    StrongBot(Init){
+      *(Init):
+      |Key(4) ? Wait()  : (Action)
+      |True() ? Store() : (Deplacement)
+      
+ 	  *(Deplacement):
+   	  |Key(9) ? Wait() : (Action)
+	  |Key(8) ? Wait() : (Action)
+   	  |True() ? Wait() : (Init)
+      
+      *(Action):
+      |Key(1) ? Wait() : (Action1)
+      |True() ? Wait() : (Action2)
+      
+      *(Action1):
+      |Key(1) ? Pop() : (Init)
+      |True() ? Wizz() : (Init)
+      
+      *(Action2):
+      |Key(1) ? Protect() : (Init)
+      |True() ? Hit() : (Init)
+      *(InAttack):
+      |Key(3) ? Wait() :(Init)
+      |True() ? Wait() :(Init)
+      
+     
+      
+      }
+      
+Weakbot(Init){
+*(Init):
+|Key(1) ? Wizz() : (Init)
+
+|Key(2) ? Turn(F) :(Init)
+|Key(3) ? Protect() : (Init)
+|True() ? Move() : (Init)
+
+ }
+ 
+ 
+Mediumbot(Init){
+*(Init):
+|Key(4) ? Throw() : (Init)
+|Key(2) ? Turn(F) :(Init)
+|Key(3) ? Protect() : (Init)
+|True() ? Move() : (Init)
+
+ }
+ 
+ Chien(Init){
+*(Init):
+
+|Key(6) ? Hit() : (Init)
+|Key(2) ? Turn(F) :(Init)
+|True() ? Move() : (Init)
+
+ }

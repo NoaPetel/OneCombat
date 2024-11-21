@@ -1,0 +1,103 @@
+WeakBot(Init){
+* (Init)
+| Cell(L,V) & Cell(R,V)? 95% Move(L) / 5% Move(R):(Init)
+| Cell(L,V) & Cell(R,_)? Move(L):(Init)
+| Cell(R,V) & Cell(L,_)? Move(R):(Init)
+| Cell(R,_) & Cell(L,_)? Wait :(Init)
+| ! GotPower ? Egg(F) :()
+* ()
+}
+
+
+MediumBot(Init){
+* (Init)
+| Cell(L,V) & Cell(R,V)? 70% Move(L) / 30% Move(R):(Action)
+| Cell(L,V) & Cell(R,A)? 70% Move(L) / 30% Wait:(Action)
+| Cell(R,V) & Cell(L,A)? 70% Move(R) / 30% Wait:(Action)
+| Cell(R,_) & Cell(L,_) ? :(Action)
+| !(GotPower) ? Egg(F) :()
+* (Action)
+| True ? 50% Pop / 50% Wizz :(Init)
+* ()
+}
+
+Platform(Init){
+* (Init)
+| !(GotPower) ? :()
+| Cell(F,V) & Cell(B,V) & Cell(L,V) & Cell(R,V) ? 30% Move(F) / 20% Move(B) / 30% Move(L) / 20% Move(R):(Init)
+| !Cell(F,V) & !Cell(B,V) & Cell(L,V) & Cell(R,V)? 5% Move(L) / 95% Move(R) :(Init)
+| Cell(L,V) & !(Cell(R,_)) & !(Cell(R,T)) ? 70% Move(L) / 30% Wait :(Init)
+| Cell(R,V) & !(Cell(L,_)) & !(Cell(L,T)) ? 70% Move(R) / 30% Wait: (Init)
+| Cell(L,T) ? Pop: ()
+| Cell(R,T) ? Pop: ()
+| Cell(L,M) / Cell(R,M) / Cell(F,M) ? Egg : ()
+| Cell(F,A) ? Wizz : (Init)
+* ()
+}
+
+StrongBotStandard(Init){
+* (Init)
+| GotPower ? :(Hunt)
+| !(GotPower) ? Egg :()
+* (Hunt)
+| Closest(A,L) ? Move(L) : (Hunt)
+| Closest(A,R) ? Move(R) : (Hunt)
+| Cell(L,A) ? 40% Pop(L) / 30% Protect / 30% Wizz(L):(Init)
+| Cell(R,A) ? 40% Pop(R) / 30% Protect / 30% Wizz(R):(Init)
+* ()
+}
+
+StrongBotAggressive(Init){
+* (Init)
+| GotPower ? :(Hunt)
+| !(GotPower) ? Egg :()
+* (Hunt)
+| Closest(A,L) ? Move(L) : (Hunt)
+| Closest(A,R) ? Move(R) : (Hunt)
+| Cell(L,A) ? 50% Pop(L) / 50% Wizz(L):(Init)
+| Cell(R,A) ? 50% Pop(R) / 50% Wizz(R):(Init)
+* ()
+}
+
+StrongBotDefending(Init){
+* (Init)
+| GotPower ? :(Hunt)
+| !(GotPower) ? Egg :()
+* (Hunt)
+| Closest(A,L) ? Move(L) : (Hunt)
+| Closest(A,R) ? Move(R) : (Hunt)
+| Cell(L,A) / Cell(R,A) ? Protect :(Init)
+| Cell(R,A) ? 40% Pop(R) / 30% Protect / 30% Wizz(L):(Init)
+* ()
+}
+
+Player1(Init){
+* (Init)
+| Key(81) ? Move(L) : (Init)
+| Key(68) ? Move(R) : (Init)
+| Key(82) ? Pop : (Init)
+| Key(83) ? Protect :(Init)
+| Key(84) ? Wizz : (Init)
+| Key(69) ? Hit(N): (Init)
+| Key(90) & !(Cell(B,V)) ? Jump: (Init)
+| !(GotPower) ? Egg :()
+* ()
+}
+
+Player2(Init){
+* (Init)
+| Key(37) ? Move(L) : (Init)
+| Key(39) ? Move(R) : (Init)
+| Key(98) ? Pop : (Init)
+| Key(40) ? Protect :(Init)
+| Key(99) ? Wizz : (Init)
+| Key(97) ? Hit(N): (Init)
+| Key(38) & !(Cell(B,V)) ? Jump: (Init)
+| !(GotPower) ? Egg :()
+* ()
+}
+
+Portail(Teleport){
+* (Teleport)
+| !Cell(H,V) ? : (Teleport)
+}

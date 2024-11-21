@@ -1,0 +1,21 @@
+WeakBot(Init){
+* (Init)
+| Cell(L,V) & Cell(R,V)? 95% Move(L) / 5% Move(R):()
+| Cell(L,V) & Cell(R,_)? Move(L):(Init)
+| Cell(R,V) & Cell(L,_)? Move(R):(Init)
+| Cell(R,_) & Cell(L,_)? Wait :(Init)
+| ! GotPower ? Egg(F) :()
+* ()
+}
+
+Egyptologue(Explore){
+ * (Explore)
+ | Cell(H,C) ?          :()
+ | Cell(F,V) ? Move(F)  :(Paint)
+ | Cell(L,V) ? Turn(L)  :(Explore)
+ | Cell(R,V) ? Turn(R)  :(Explore)
+ | Cell(B,V) ? Turn(B)  :(Explore)
+
+ * (Paint): True ? Pop(B) :(Explore)
+}
+
