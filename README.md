@@ -43,12 +43,6 @@ This project is a **fighting game** inspired by the *One Piece* universe. It com
 
 <br/>
 
-<p align="center">
-	<img src="https://upload.wikimedia.org/wikipedia/commons/f/fc/Luffy_vs_Doflamingo.png" width="500">
-</p>
-
-<br/>
-
 # 🛠️ Install
 
 ## 📦 Dependencies
