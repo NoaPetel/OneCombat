@@ -1,9 +1,0 @@
-/**
- * 
- */
-/**
- * @author alexandre
- *
- */
-module State {
-}
